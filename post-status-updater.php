@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Post Status Updater
- * Description: A plugin to update post statuses based on expected status and target status.
+ * Description: A lightweight tool to bulk update post statuses based on expected status and target status.
  * Version: 1.0
  * Author: Your Name
  */
@@ -11,15 +11,16 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-// Add admin menu item
-add_action('admin_menu', 'psu_add_admin_menu');
-function psu_add_admin_menu() {
-    add_menu_page(
-        'Post Status Updater',
-        'Status Updater',
-        'manage_options',
-        'post-status-updater',
-        'psu_render_admin_page'
+// Add submenu item under the "Tools" menu
+add_action('admin_menu', 'psu_add_submenu_page');
+function psu_add_submenu_page() {
+    add_submenu_page(
+        'tools.php',              // Parent menu slug (Tools)
+        'Post Status Updater',    // Page title
+        'Status Updater',         // Menu title
+        'manage_options',         // Capability required
+        'post-status-updater',    // Menu slug
+        'psu_render_admin_page'   // Callback function
     );
 }
 
